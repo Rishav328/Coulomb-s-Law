@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Space Shooting Game</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+        <style>
+            body {
+                margin:  0;
+                padding: 0;
+                text-align: center;
+            }
+
+            input {
+                width: 60px;
+                outline: none;
+                margin: 2px;
+                padding: 2px;
+                height: 20px;
+                border: 2px solid teal;
+           }
+
+          form {
+               margin-top:    7px;
+               margin-bottom: 7px;
+          }
+    </style>
+    </head>
+    <body>
+        <form>
+            <input value="40" id="x1" placeholder="x1 axis"   type="number" required/>
+            <input value="40" id="y1" placeholder="y1 axis"   type="number" required/>
+            <input value="100" id="x2" placeholder="x2 axis"   type="number" required/>
+            <input value="100" id="y2" placeholder="y2 axis"   type="number" required/>
+            <input value="10" id="Q" placeholder="Q charge" type="number" required/>
+            <input value="10" id="q" placeholder="q charge" type="number" required/><br />
+        </form>
+        
+        <script>
+ 
+ // PROJECT: Showing  forces  between  two  point 
+//          charges using Coulomb's law.
+
+// THEORY:  Coulomb   has  observed  that  force
+//          feeled by  a  particular charge   is
+//          directly proportional to the product 
+//          of two point charges q1 and q2   and
+//          inversly proportion the  distance of
+//          of sepration's(r) square
+
+// MATHEMATICALLY: F = k((q1 * q2)/ r²)
+// we  are  assuming  that  the medium is vaccum.
+
+alert('TO START: PLEASE FIRST PRESS THE BLACK SCREEN, WE ARE GOING TO SEE THE FORCE FEEL BY q POINT CHARGE!')
+
+const HEIGHT = 400;
+const WIDTH  = 350;
+
+var x1 = 0 , y1 = 0;
+var x2 = 0, y2 = 0;
+var q = 0, Q = 0;
+var r = dist(x1, y1, x2, y2); //distance  formula
+var f = 0;
+
+function setup() {
+    createCanvas(WIDTH, HEIGHT);
+    background(0, 0, 0);
+}
+
+function draw()  {
+    background(0, 0, 0)
+    system()
+}
+
+// system():  its the main from where we will put
+//            all  our stuff,  like  point charge 
+//            vector's, dotted lines for distance
+
+function system() {
+
+    stroke('red');
+    strokeWeight(10);
+    point(x1, y1); // point charge Q
+
+    stroke('orange');
+    strokeWeight(10);
+    point(x2, y2); // point charge q
+
+    stroke('white');
+    strokeWeight(2);
+    line(x1, y1, x2, y2); // sepration r
+
+    noStroke()
+    fill('green');
+    text(`distance: ${r}m`, 10, 12);
+
+    fill('teal')
+    text(`Force: ${f} N (along the same line)`, 10, 350)
+    if (f > 0) {
+        text(`Repulsive Force`, 10, 390)
+    } else {
+        text(`Attractive Force`, 10, 390)
+    }
+
+    fill('yellow');
+    text(`Q(${Q})`, x1, y1 - 5);
+    text(`q(${q}C)`, x2, y2 - 5);
+}
+
+function mouseClicked() { 
+    x1 = document.getElementById("x1").value;
+    y1 = document.getElementById("y1").value;
+    x2 = document.getElementById("x2").value;
+    y2 = document.getElementById("y2").value;
+    q = parseInt(document.getElementById("q").value);
+    Q = parseInt(document.getElementById("Q").value);
+    r = dist(x1, y1, x2, y2);
+    f = force(q, Q, r);
+}
+
+function dist(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow((x2 - x1), 2), Math.pow((y2 - y1), 2));
+}
+
+function force(q1, q2, r) {
+    var k = 9 * Math.pow(10, 9);
+    return (k * q1 * q2) / (r * r);
+}
+
+// for direction we know that there is only two
+// point charges means the effect feel by q  is
+// within same line, so we will just define  an
+// arrow just to show direction here not    the
+// magnitute for our code.
+
+        
+        </script>
+    </body>
+</html>
